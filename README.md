@@ -1,4 +1,4 @@
-# state_demo
+# flutter_dice
 
 A sample Flutter app that shows how to manage responsive state using the bloc pattern.
 
