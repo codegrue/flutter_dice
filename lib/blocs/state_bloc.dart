@@ -36,11 +36,14 @@ class StateBloc {
 
   // Functions
   Future changeThemeType(ThemeType type) async {
-    var theme =
-        (type == ThemeType.Light) ? ThemeData.light() : ThemeData.dark();
+    var theme = themeTypeToData(type);
     changeTheme(theme);
     _themeType.sink.add(type);
     persistState.saveTheme(type); // persist to disk
+  }
+
+  ThemeData themeTypeToData(ThemeType type) {
+    return (type == ThemeType.Light) ? ThemeData.light() : ThemeData.dark();
   }
 
   void flipTheme() {
