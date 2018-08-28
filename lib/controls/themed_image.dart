@@ -15,7 +15,7 @@ class ThemedImage extends StatelessWidget {
       stream: stateBloc.themeType,
       builder: (content, snapshot) {
         ThemeType type = snapshot.data;
-        String suffix = (type == ThemeType.Light) ? "w" : "b";
+        String suffix = (type == ThemeType.light) ? "w" : "b";
 
         return Image(image: AssetImage('images/$filename-$suffix.png'));
       },

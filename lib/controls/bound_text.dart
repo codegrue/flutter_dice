@@ -12,7 +12,7 @@ class BoundText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
+    return StreamBuilder<dynamic>(
       stream: stream,
       builder: (content, snapshot) {
         return Text(snapshot.data.toString(), style: style);

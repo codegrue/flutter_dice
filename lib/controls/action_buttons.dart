@@ -15,7 +15,7 @@ class ActionButtons extends StatelessWidget {
           FloatingActionButton(
             onPressed: () => stateBloc.decrementDice(),
             tooltip: 'Decrement',
-            child: new Icon(Icons.arrow_downward),
+            child: Icon(Icons.arrow_downward),
           ),
           FloatingActionButton(
             shape: RoundedRectangleBorder(
@@ -27,7 +27,7 @@ class ActionButtons extends StatelessWidget {
           FloatingActionButton(
             onPressed: () => stateBloc.incrementDice(),
             tooltip: 'Increment',
-            child: new Icon(Icons.arrow_upward),
+            child: Icon(Icons.arrow_upward),
           ),
         ],
       ),

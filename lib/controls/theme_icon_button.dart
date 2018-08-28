@@ -12,7 +12,7 @@ class ThemeIconButton extends StatelessWidget {
       builder: (content, snapshot) {
         ThemeType type = snapshot.data;
         IconData icon =
-            (type == ThemeType.Light) ? Icons.brightness_4 : Icons.brightness_7;
+            (type == ThemeType.light) ? Icons.brightness_4 : Icons.brightness_7;
         return IconButton(
           icon: Icon(icon),
           onPressed: () => stateBloc.flipTheme(),

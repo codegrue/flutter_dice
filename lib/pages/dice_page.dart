@@ -11,9 +11,9 @@ class DicePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text(title),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
         actions: <Widget>[
           ThemeIconButton(),
         ],

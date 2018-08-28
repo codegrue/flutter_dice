@@ -4,7 +4,7 @@ import 'package:rxdart/rxdart.dart';
 import 'package:flutter_dice/services/state_persist.dart';
 import 'dart:math';
 
-enum ThemeType { Light, Dark }
+enum ThemeType { light, dark }
 
 class StateBloc {
   final persistState = PersistState();
@@ -43,12 +43,12 @@ class StateBloc {
   }
 
   ThemeData themeTypeToData(ThemeType type) {
-    return (type == ThemeType.Light) ? ThemeData.light() : ThemeData.dark();
+    return (type == ThemeType.light) ? ThemeData.light() : ThemeData.dark();
   }
 
   void flipTheme() {
     var newTheme =
-        (_themeType.value == ThemeType.Dark) ? ThemeType.Light : ThemeType.Dark;
+        (_themeType.value == ThemeType.dark) ? ThemeType.light : ThemeType.dark;
     changeThemeType(newTheme);
   }
 
@@ -60,7 +60,7 @@ class StateBloc {
 
   void rollDice() {
     var numberOfSides = _sides.value;
-    var value = new Random().nextInt(numberOfSides) + 1;
+    var value = Random().nextInt(numberOfSides) + 1;
     changeRoll(value);
   }
 

@@ -3,8 +3,6 @@ import 'package:flutter_dice/blocs/state_bloc.dart';
 import 'package:flutter_dice/pages/dice_page.dart';
 import 'package:flutter_dice/providers/state_provider.dart';
 import 'package:flutter_dice/services/state_persist.dart';
-import 'dart:async';
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(StatefulWrapper());
 
@@ -22,7 +20,7 @@ class ThemeableApp extends StatefulWidget {
 
   @override
   ThemeableAppState createState() {
-    return new ThemeableAppState();
+    return ThemeableAppState();
   }
 }
 
@@ -47,9 +45,10 @@ class ThemeableAppState extends State<ThemeableApp> {
       initialData: stateBloc.themeTypeToData(themeTypeName),
       stream: stateBloc.theme,
       builder: (content, snapshot) {
+        ThemeData theme = snapshot.data;
         return MaterialApp(
           title: widget.appName,
-          theme: snapshot.data,
+          theme: theme,
           home: DicePage(title: widget.appName),
         );
       },
