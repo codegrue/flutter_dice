@@ -12,3 +12,7 @@ A sample Flutter app that shows how to manage responsive state using the bloc pa
 - dynamic theme switching
 - Consumption of bloc using `StreamBuilder` widgets
 - Persisting state using `SharedPreferences`
+
+## Current Issues
+
+- Screen draws prior to theme loading, so you may see the wrong theme briefly
