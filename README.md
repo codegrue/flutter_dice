@@ -2,8 +2,9 @@
 
 A sample Flutter app that shows how to manage responsive state using the bloc pattern.
 
-![Screenshot](https://github.com/codegrue/flutter_dice/blob/master/images/screenshots/sample-light.png)
-![Screenshot](https://github.com/codegrue/flutter_dice/blob/master/images/screenshots/sample-dark.png)
+![Screenshot](https://github.com/codegrue/flutter_dice/blob/master/images/screenshots/sample-light.png?s=200)
+
+![Screenshot](https://github.com/codegrue/flutter_dice/blob/master/images/screenshots/sample-dark.png?s=200)
 
 ## Concepts Illustrated
 
