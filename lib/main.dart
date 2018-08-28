@@ -14,6 +14,8 @@ class StatefulWrapper extends StatelessWidget {
 }
 
 class ThemeableApp extends StatelessWidget {
+  final String appName = 'Flutter Dice';
+
   @override
   Widget build(BuildContext context) {
     var stateBloc = StateProvider.of(context);
@@ -21,9 +23,9 @@ class ThemeableApp extends StatelessWidget {
       stream: stateBloc.theme,
       builder: (content, snapshot) {
         return MaterialApp(
-          title: 'Dice',
+          title: appName,
           theme: snapshot.data,
-          home: DicePage(title: 'Dice Roller'),
+          home: DicePage(title: appName),
         );
       },
     );

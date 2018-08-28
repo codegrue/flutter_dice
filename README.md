@@ -1,8 +1,14 @@
 # state_demo
 
-A new Flutter project.
+A sample Flutter app that shows how to manage responsive state using the bloc pattern.
 
-## Getting Started
+![Screenshot](https://github.com/codegrue/flutter_dice/blob/master/images/screenshots/sample-light.gif)
+![Screenshot](https://github.com/codegrue/flutter_dice/blob/master/images/screenshots/sample-dark.gif)
 
-For help getting started with Flutter, view our online
-[documentation](https://flutter.io/).
+## Concepts Illustrated
+
+- Using a bloc pattern for application state
+- Using an `InheritedWidget` Provider to make the bloc globally accessible
+- dynamic theme switching
+- Consumption of bloc using `StreamBuilder` widgets
+- Persisting state using `SharedPreferences`
