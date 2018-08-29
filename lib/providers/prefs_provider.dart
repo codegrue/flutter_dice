@@ -17,7 +17,8 @@ class PrefsProvider extends InheritedWidget {
   final SharedPreferences prefs;
 
   @override
-  bool updateShouldNotify(_) => true;
+  bool updateShouldNotify(PrefsProvider oldWidget) =>
+      (oldWidget.prefs != prefs);
 
   static SharedPreferences of(BuildContext context) {
     return (context.inheritFromWidgetOfExactType(PrefsProvider)

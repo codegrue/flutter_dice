@@ -10,7 +10,8 @@ class DiceProvider extends InheritedWidget {
   final DiceBloc diceBloc;
 
   @override
-  bool updateShouldNotify(_) => true;
+  bool updateShouldNotify(DiceProvider oldWidget) =>
+      (oldWidget.diceBloc != diceBloc);
 
   static DiceBloc of(BuildContext context) {
     return (context.inheritFromWidgetOfExactType(DiceProvider) as DiceProvider)

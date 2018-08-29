@@ -10,7 +10,8 @@ class ThemeProvider extends InheritedWidget {
   final ThemeBloc themeBloc;
 
   @override
-  bool updateShouldNotify(_) => true;
+  bool updateShouldNotify(ThemeProvider oldWidget) =>
+      (oldWidget.themeBloc != themeBloc);
 
   static ThemeBloc of(BuildContext context) {
     return (context.inheritFromWidgetOfExactType(ThemeProvider)
