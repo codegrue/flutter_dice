@@ -1,18 +1,18 @@
 import 'dart:async';
+import 'package:flutter_dice/providers/prefs_provider.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:flutter_dice/services/state_persist.dart';
 import 'dart:math';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 class DiceBloc {
-  final persistState = PersistState();
-
-  DiceBloc() {
-    init();
+  DiceBloc(this.prefs) {
+    var sides = prefs.getInt(PreferenceNames.sides) ?? 6;
+    changeSides(sides);
   }
 
-  Future init() async {
-    changeSides(await persistState.loadSides());
-  }
+  // Regular variables
+  SharedPreferences prefs;
 
   // Reactive variables
   final _roll = BehaviorSubject<int>();
@@ -29,7 +29,7 @@ class DiceBloc {
   Future changeSides(int sides) async {
     _sides.sink.add(sides);
     rollDice();
-    persistState.saveSides(sides); // persist to disk
+    prefs.setInt(PreferenceNames.sides, sides); // persist to disk
   }
 
   void rollDice() {

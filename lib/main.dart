@@ -1,55 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dice/blocs/theme_bloc.dart';
 import 'package:flutter_dice/pages/dice_page.dart';
+import 'package:flutter_dice/providers/prefs_provider.dart';
 import 'package:flutter_dice/providers/theme_provider.dart';
-import 'package:flutter_dice/services/state_persist.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() => runApp(StatefulWrapper());
+void main() async {
+  final sharedPreferences = await SharedPreferences.getInstance();
 
-class StatefulWrapper extends StatelessWidget {
+  runApp(MyApp(
+    sharedPreferences,
+  ));
+}
+
+class MyApp extends StatelessWidget {
+  MyApp(this.sharedPreferences);
+
+  final SharedPreferences sharedPreferences;
+
   @override
   Widget build(BuildContext context) {
-    return ThemeProvider(
-      child: ThemeableApp(),
+    return PrefsProvider(
+      prefs: sharedPreferences,
+      child: ThemeProvider(
+        prefs: sharedPreferences,
+        child: ThemeableApp(),
+      ),
     );
   }
 }
 
-class ThemeableApp extends StatefulWidget {
+class ThemeableApp extends StatelessWidget {
   final String appName = 'Flutter Dice';
-
-  @override
-  ThemeableAppState createState() {
-    return ThemeableAppState();
-  }
-}
-
-class ThemeableAppState extends State<ThemeableApp> {
-  ThemeType themeTypeName;
-
-  @override
-  void initState() {
-    super.initState();
-    init();
-  }
-
-  void init() async {
-    final persistState = PersistState();
-    themeTypeName = await persistState.loadThemeType();
-  }
 
   @override
   Widget build(BuildContext context) {
     var themeBloc = ThemeProvider.of(context);
     return StreamBuilder(
-      initialData: themeBloc.themeTypeToData(themeTypeName),
+      initialData: themeBloc.loadTheme(),
       stream: themeBloc.theme,
       builder: (content, snapshot) {
         ThemeData theme = snapshot.data;
         return MaterialApp(
-          title: widget.appName,
+          title: appName,
           theme: theme,
-          home: DicePage(title: widget.appName),
+          home: DicePage(title: appName),
         );
       },
     );

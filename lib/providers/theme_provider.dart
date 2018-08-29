@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dice/blocs/theme_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeProvider extends InheritedWidget {
-  ThemeProvider({Key key, Widget child}) : super(key: key, child: child);
+  ThemeProvider({Key key, Widget child, SharedPreferences prefs})
+      : themeBloc = ThemeBloc(prefs),
+        super(key: key, child: child);
 
-  final themeBloc = ThemeBloc();
+  final ThemeBloc themeBloc;
 
   @override
   bool updateShouldNotify(_) => true;
