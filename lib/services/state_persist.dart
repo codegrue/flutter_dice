@@ -1,5 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_dice/blocs/state_bloc.dart';
+import 'package:flutter_dice/blocs/theme_bloc.dart';
 import 'dart:async';
 
 enum Prefs { sides, themeType }

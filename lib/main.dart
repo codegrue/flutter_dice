@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dice/blocs/state_bloc.dart';
+import 'package:flutter_dice/blocs/theme_bloc.dart';
 import 'package:flutter_dice/pages/dice_page.dart';
-import 'package:flutter_dice/providers/state_provider.dart';
+import 'package:flutter_dice/providers/theme_provider.dart';
 import 'package:flutter_dice/services/state_persist.dart';
 
 void main() => runApp(StatefulWrapper());
@@ -9,7 +9,7 @@ void main() => runApp(StatefulWrapper());
 class StatefulWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StateProvider(
+    return ThemeProvider(
       child: ThemeableApp(),
     );
   }
@@ -40,10 +40,10 @@ class ThemeableAppState extends State<ThemeableApp> {
 
   @override
   Widget build(BuildContext context) {
-    var stateBloc = StateProvider.of(context);
+    var themeBloc = ThemeProvider.of(context);
     return StreamBuilder(
-      initialData: stateBloc.themeTypeToData(themeTypeName),
-      stream: stateBloc.theme,
+      initialData: themeBloc.themeTypeToData(themeTypeName),
+      stream: themeBloc.theme,
       builder: (content, snapshot) {
         ThemeData theme = snapshot.data;
         return MaterialApp(
