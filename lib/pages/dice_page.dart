@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dice/controls/action_buttons.dart';
-import 'package:flutter_dice/controls/dice_display.dart';
-import 'package:flutter_dice/controls/sides_buttons.dart';
-import 'package:flutter_dice/controls/theme_icon_button.dart';
+import 'package:flutter_dice/widgets/action_buttons.dart';
+import 'package:flutter_dice/widgets/dice_display.dart';
+import 'package:flutter_dice/widgets/sides_buttons.dart';
+import 'package:flutter_dice/widgets/theme_icon_button.dart';
 import 'package:flutter_dice/providers/dice_provider.dart';
-import 'package:flutter_dice/providers/prefs_provider.dart';
 
 class DicePage extends StatelessWidget {
   DicePage({Key key, this.title}) : super(key: key);
@@ -14,7 +13,6 @@ class DicePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DiceProvider(
-      prefs: PrefsProvider.of(context),
       child: Scaffold(
         appBar: AppBar(
           title: Text(title),

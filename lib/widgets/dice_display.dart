@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dice/controls/bound_text.dart';
+import 'package:flutter_dice/widgets/bound_text.dart';
 import 'package:flutter_dice/providers/dice_provider.dart';
 
 class DiceDisplay extends StatelessWidget {

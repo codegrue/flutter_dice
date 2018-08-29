@@ -1,17 +1,18 @@
 import 'dart:async';
-import 'package:flutter_dice/providers/prefs_provider.dart';
+import 'package:flutter_dice/models/preference_names.dart';
+import 'package:flutter_dice/providers/prefs_singleton.dart';
 import 'package:rxdart/rxdart.dart';
 import 'dart:math';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DiceBloc {
-  DiceBloc(this.prefs) {
+  DiceBloc() {
     loadState();
   }
 
   // Regular variables
-  SharedPreferences prefs;
+  final SharedPreferences prefs = PrefsSingleton.prefs;
 
   // Reactive variables
   final _roll = BehaviorSubject<int>();

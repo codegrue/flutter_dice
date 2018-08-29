@@ -1,30 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dice/pages/dice_page.dart';
-import 'package:flutter_dice/providers/prefs_provider.dart';
+import 'package:flutter_dice/providers/prefs_singleton.dart';
 import 'package:flutter_dice/providers/theme_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
-  final sharedPreferences = await SharedPreferences.getInstance();
+  PrefsSingleton.prefs = await SharedPreferences.getInstance();
 
-  runApp(MyApp(
-    sharedPreferences,
-  ));
+  runApp(DiceApp());
 }
 
-class MyApp extends StatelessWidget {
-  MyApp(this.sharedPreferences);
-
-  final SharedPreferences sharedPreferences;
-
+class DiceApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return PrefsProvider(
-      prefs: sharedPreferences,
-      child: ThemeProvider(
-        prefs: sharedPreferences,
-        child: ResponsiveApp(),
-      ),
+    return ThemeProvider(
+      child: ResponsiveApp(),
     );
   }
 }

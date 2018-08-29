@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dice/controls/themed_image.dart';
+import 'package:flutter_dice/widgets/themed_image.dart';
 import 'package:flutter_dice/providers/dice_provider.dart';
 
 class ActionButtons extends StatelessWidget {
