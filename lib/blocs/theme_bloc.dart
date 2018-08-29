@@ -7,7 +7,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 enum ThemeType { light, dark }
 
 class ThemeBloc {
-  ThemeBloc(this.prefs);
+  ThemeBloc(this.prefs) {
+    loadState();
+  }
 
   // Regular variables
   SharedPreferences prefs;
@@ -21,20 +23,21 @@ class ThemeBloc {
   Observable<ThemeType> get themeType => _themeType.stream;
 
   // Sinks
-  Function(ThemeData) get changeTheme => _theme.sink.add;
+  Function(ThemeData) get _changeTheme => _theme.sink.add;
+  Function(ThemeType) get _changeThemeType => _themeType.sink.add;
 
   // Logic Functions
-  Future changeThemeType(ThemeType type) async {
+  Future changeTheme(ThemeType type) async {
     var theme = themeTypeToData(type);
-    changeTheme(theme);
-    _themeType.sink.add(type);
-    saveThemeType(type); // persist to disk
+    _changeTheme(theme);
+    _changeThemeType(type);
+    await saveState(type);
   }
 
   void flipTheme() {
     var newTheme =
         (_themeType.value == ThemeType.dark) ? ThemeType.light : ThemeType.dark;
-    changeThemeType(newTheme);
+    changeTheme(newTheme);
   }
 
   ThemeData themeTypeToData(ThemeType type) {
@@ -42,17 +45,21 @@ class ThemeBloc {
   }
 
   // Persistence Functions
-  Future saveThemeType(ThemeType themeType) async {
-    prefs.setString(PreferenceNames.themeType, themeType.toString());
+  Future saveState(ThemeType themeType) async {
+    await prefs.setString(
+        PreferenceNames.themeType, _themeType.value.toString());
   }
 
-  ThemeData loadTheme() {
+  ThemeData loadState() {
     var themePref = prefs.getString(PreferenceNames.themeType) ??
         ThemeType.light.toString();
     var type = (themePref == ThemeType.light.toString())
         ? ThemeType.light
         : ThemeType.dark;
-    return themeTypeToData(type);
+    _changeThemeType(type);
+    var theme = themeTypeToData(type);
+    _changeTheme(theme);
+    return theme;
   }
 
   Future dispose() async {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PreferenceNames {
+  static const roll = "roll";
   static const sides = "sides";
   static const themeType = "theme_type";
 }

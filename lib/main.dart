@@ -36,7 +36,7 @@ class ThemeableApp extends StatelessWidget {
   Widget build(BuildContext context) {
     var themeBloc = ThemeProvider.of(context);
     return StreamBuilder(
-      initialData: themeBloc.loadTheme(),
+      initialData: themeBloc.loadState(),
       stream: themeBloc.theme,
       builder: (content, snapshot) {
         ThemeData theme = snapshot.data;

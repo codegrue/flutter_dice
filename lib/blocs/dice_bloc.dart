@@ -7,8 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class DiceBloc {
   DiceBloc(this.prefs) {
-    var sides = prefs.getInt(PreferenceNames.sides) ?? 6;
-    changeSides(sides);
+    loadState();
   }
 
   // Regular variables
@@ -23,29 +22,41 @@ class DiceBloc {
   Observable<int> get sides => _sides.stream;
 
   // Sinks
-  Function(int) get changeRoll => _roll.sink.add;
+  Function(int) get _changeRoll => _roll.sink.add;
+  Function(int) get _changeSides => _sides.sink.add;
 
-  // Functions
+  // Logic Functions
   Future changeSides(int sides) async {
-    _sides.sink.add(sides);
-    rollDice();
-    prefs.setInt(PreferenceNames.sides, sides); // persist to disk
+    _changeSides(sides);
+    await rollDice();
   }
 
-  void rollDice() {
+  Future rollDice() async {
     var numberOfSides = _sides.value;
     var value = Random().nextInt(numberOfSides) + 1;
-    changeRoll(value);
+    _changeRoll(value);
+    await saveState();
   }
 
   void incrementDice() {
     int value = min(_roll.value + 1, _sides.value);
-    if (value != null) changeRoll(value);
+    if (value != null) _changeRoll(value);
   }
 
   void decrementDice() {
     int value = max(_roll.value - 1, 1);
-    if (value != null) changeRoll(value);
+    if (value != null) _changeRoll(value);
+  }
+
+  // Persistence Functions
+  Future saveState() async {
+    await prefs.setInt(PreferenceNames.sides, _sides.value);
+    await prefs.setInt(PreferenceNames.roll, _roll.value);
+  }
+
+  void loadState() {
+    _changeSides(prefs.getInt(PreferenceNames.sides) ?? 6);
+    _changeRoll(prefs.getInt(PreferenceNames.roll) ?? 1);
   }
 
   Future dispose() async {
