@@ -23,13 +23,13 @@ class MyApp extends StatelessWidget {
       prefs: sharedPreferences,
       child: ThemeProvider(
         prefs: sharedPreferences,
-        child: ThemeableApp(),
+        child: ResponsiveApp(),
       ),
     );
   }
 }
 
-class ThemeableApp extends StatelessWidget {
+class ResponsiveApp extends StatelessWidget {
   final String appName = 'Flutter Dice';
 
   @override
