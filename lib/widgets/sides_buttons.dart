@@ -13,7 +13,7 @@ class SidesButtons extends StatelessWidget {
       child: StreamBuilder(
         stream: diceBloc.sides,
         builder: (context, snapshot) {
-          int faces = snapshot.data;
+          int faces = snapshot.data as int;
           return Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[

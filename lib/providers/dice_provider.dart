@@ -11,7 +11,6 @@ class DiceProvider extends InheritedWidget {
       (oldWidget.diceBloc != diceBloc);
 
   static DiceBloc of(BuildContext context) {
-    return (context.inheritFromWidgetOfExactType(DiceProvider) as DiceProvider)
-        .diceBloc;
+    return context.dependOnInheritedWidgetOfExactType<DiceProvider>().diceBloc;
   }
 }

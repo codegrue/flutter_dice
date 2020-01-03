@@ -10,7 +10,7 @@ class ThemeIconButton extends StatelessWidget {
     return StreamBuilder(
       stream: themeBloc.themeType,
       builder: (content, snapshot) {
-        ThemeType type = snapshot.data;
+        ThemeType type = snapshot.data as ThemeType;
         IconData icon =
             (type == ThemeType.light) ? Icons.brightness_4 : Icons.brightness_7;
         return IconButton(

@@ -11,8 +11,8 @@ class ThemeProvider extends InheritedWidget {
       (oldWidget.themeBloc != themeBloc);
 
   static ThemeBloc of(BuildContext context) {
-    return (context.inheritFromWidgetOfExactType(ThemeProvider)
-            as ThemeProvider)
+    return context
+        .dependOnInheritedWidgetOfExactType<ThemeProvider>()
         .themeBloc;
   }
 }

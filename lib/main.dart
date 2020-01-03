@@ -29,7 +29,7 @@ class ResponsiveApp extends StatelessWidget {
       initialData: themeBloc.loadState(),
       stream: themeBloc.theme,
       builder: (content, snapshot) {
-        ThemeData theme = snapshot.data;
+        ThemeData theme = snapshot.data as ThemeData;
         return MaterialApp(
           title: appName,
           theme: theme,
