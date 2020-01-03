@@ -5,6 +5,8 @@ import 'package:flutter_dice/providers/theme_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   PrefsSingleton.prefs = await SharedPreferences.getInstance();
 
   runApp(DiceApp());
