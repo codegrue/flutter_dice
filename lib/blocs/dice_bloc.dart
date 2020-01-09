@@ -7,16 +7,23 @@ import 'dart:math';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DiceBloc {
-  DiceBloc() {
-    loadState();
-  }
-
   // Regular variables
   final SharedPreferences prefs = PrefsSingleton.prefs;
 
   // Reactive variables
   final _roll = BehaviorSubject<int>();
   final _sides = BehaviorSubject<int>();
+
+  DiceBloc() {
+    loadState();
+    // Save states on new value
+    _sides.stream.listen((_) => saveSides());
+    _roll.stream.listen((_) => saveRoll());
+  }
+
+  // Saving state functions
+  Future saveRoll() => prefs.setInt(PreferenceNames.roll, _roll.value);
+  Future saveSides() => prefs.setInt(PreferenceNames.sides, _sides.value);
 
   // Streams
   Observable<int> get roll => _roll.stream;
@@ -27,16 +34,15 @@ class DiceBloc {
   Function(int) get _changeSides => _sides.sink.add;
 
   // Logic Functions
-  Future changeSides(int sides) async {
+  void changeSides(int sides) {
     _changeSides(sides);
-    await rollDice();
+    rollDice();
   }
 
-  Future rollDice() async {
+  void rollDice() {
     var numberOfSides = _sides.value;
     var value = Random().nextInt(numberOfSides) + 1;
     _changeRoll(value);
-    await saveState();
   }
 
   void incrementDice() {
@@ -47,12 +53,6 @@ class DiceBloc {
   void decrementDice() {
     int value = max(_roll.value - 1, 1);
     if (value != null) _changeRoll(value);
-  }
-
-  // Persistence Functions
-  Future saveState() async {
-    await prefs.setInt(PreferenceNames.sides, _sides.value);
-    await prefs.setInt(PreferenceNames.roll, _roll.value);
   }
 
   void loadState() {
