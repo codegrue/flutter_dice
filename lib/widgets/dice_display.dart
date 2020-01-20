@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dice/widgets/bound_text.dart';
-import 'package:flutter_dice/providers/dice_provider.dart';
+import 'package:flutter_dice/models/dice_model.dart';
+import 'package:provider/provider.dart';
 
 class DiceDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final diceBloc = DiceProvider.of(context);
-
+    final dice = Provider.of<DiceModel>(context);
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          BoundText(diceBloc.roll, style: TextStyle(fontSize: 200.0)),
+          Text(dice.roll.toString(), style: TextStyle(fontSize: 200.0)),
           Row(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Text("- [", style: TextStyle(fontSize: 20.0)),
-              BoundText(diceBloc.sides,
+              Text(dice.sides.toString(),
                   style: TextStyle(
                       fontSize: 20.0, color: Theme.of(context).accentColor)),
               Text(" sided] -", style: TextStyle(fontSize: 20.0)),

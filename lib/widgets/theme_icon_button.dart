@@ -1,23 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dice/blocs/theme_bloc.dart';
-import 'package:flutter_dice/providers/theme_provider.dart';
+import 'package:flutter_dice/models/theme_model.dart';
+import 'package:provider/provider.dart';
 
 class ThemeIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final themeBloc = ThemeProvider.of(context);
+    final theme = Provider.of<ThemeModel>(context);
 
-    return StreamBuilder(
-      stream: themeBloc.themeType,
-      builder: (content, snapshot) {
-        ThemeType type = snapshot.data as ThemeType;
-        IconData icon =
-            (type == ThemeType.light) ? Icons.brightness_4 : Icons.brightness_7;
-        return IconButton(
-          icon: Icon(icon),
-          onPressed: () => themeBloc.flipTheme(),
-        );
-      },
+    IconData icon = (theme.type == ThemeType.light)
+        ? Icons.brightness_4
+        : Icons.brightness_7;
+    return IconButton(
+      icon: Icon(icon),
+      onPressed: () => theme.flipTheme(),
     );
   }
 }

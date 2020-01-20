@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dice/models/dice_model.dart';
 import 'package:flutter_dice/widgets/themed_image.dart';
-import 'package:flutter_dice/providers/dice_provider.dart';
+import 'package:provider/provider.dart';
 
 class ActionButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final diceBloc = DiceProvider.of(context);
+    final dice = Provider.of<DiceModel>(context);
 
     return Align(
       alignment: Alignment.bottomCenter,
@@ -13,19 +14,19 @@ class ActionButtons extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           FloatingActionButton(
-            onPressed: () => diceBloc.decrementDice(),
+            onPressed: () => dice.decrementDice(),
             tooltip: 'Decrement',
             child: Icon(Icons.arrow_downward),
           ),
           FloatingActionButton(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10.0))),
-            onPressed: () => diceBloc.rollDice(),
+            onPressed: () => dice.rollDice(),
             tooltip: 'Roll',
             child: ThemedImage('rolling'),
           ),
           FloatingActionButton(
-            onPressed: () => diceBloc.incrementDice(),
+            onPressed: () => dice.incrementDice(),
             tooltip: 'Increment',
             child: Icon(Icons.arrow_upward),
           ),

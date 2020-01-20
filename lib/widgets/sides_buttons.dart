@@ -1,43 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dice/blocs/dice_bloc.dart';
+import 'package:flutter_dice/models/dice_model.dart';
 import 'package:flutter_dice/widgets/themed_image.dart';
-import 'package:flutter_dice/providers/dice_provider.dart';
+import 'package:provider/provider.dart';
 
 class SidesButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final diceBloc = DiceProvider.of(context);
+    final dice = Provider.of<DiceModel>(context);
 
     return Align(
       alignment: Alignment.topCenter,
-      child: StreamBuilder(
-        stream: diceBloc.sides,
-        builder: (context, snapshot) {
-          int faces = snapshot.data as int;
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              _buildFacesButton(4, faces, diceBloc),
-              _buildFacesButton(6, faces, diceBloc),
-              _buildFacesButton(8, faces, diceBloc),
-              _buildFacesButton(12, faces, diceBloc),
-              _buildFacesButton(20, faces, diceBloc),
-            ],
-          );
-        },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          _buildFacesButton(4, dice),
+          _buildFacesButton(6, dice),
+          _buildFacesButton(8, dice),
+          _buildFacesButton(12, dice),
+          _buildFacesButton(20, dice),
+        ],
       ),
     );
   }
 
   FloatingActionButton _buildFacesButton(
-    int desiredFaces,
-    int currentFaces,
-    DiceBloc diceBloc,
+    int desiredSides,
+    DiceModel dice,
   ) {
     return FloatingActionButton(
-      backgroundColor: (currentFaces == desiredFaces) ? Colors.orange : null,
-      onPressed: () => diceBloc.changeSides(desiredFaces),
-      child: ThemedImage('d$desiredFaces'),
+      backgroundColor: (dice.sides == desiredSides) ? Colors.orange : null,
+      onPressed: () => dice.changeSides(desiredSides),
+      child: ThemedImage('d$desiredSides'),
     );
   }
 }

@@ -14,6 +14,7 @@ dependencies:
     sdk: flutter
   rxdart: ^0.18.0
   shared_preferences: ^0.4.2
+  provider: ^4.0.2
 
 dev_dependencies:
   flutter_test:
@@ -25,18 +26,17 @@ flutter:
   # Icons provided by: https://game-icons.net/tags/dice.html
   # Created by Delapouite, http://delapouite.com, and Skoll
   assets:
-   - images/d4-w.png
-   - images/d4-b.png   
-   - images/d6-w.png
-   - images/d6-b.png   
-   - images/d8-w.png
-   - images/d8-b.png   
-   - images/d10-w.png
-   - images/d10-b.png   
-   - images/d12-w.png
-   - images/d12-b.png   
-   - images/d20-w.png  
-   - images/d20-b.png     
-   - images/rolling-w.png      
-   - images/rolling-b.png              
-
+    - images/d4-w.png
+    - images/d4-b.png
+    - images/d6-w.png
+    - images/d6-b.png
+    - images/d8-w.png
+    - images/d8-b.png
+    - images/d10-w.png
+    - images/d10-b.png
+    - images/d12-w.png
+    - images/d12-b.png
+    - images/d20-w.png
+    - images/d20-b.png
+    - images/rolling-w.png
+    - images/rolling-b.png

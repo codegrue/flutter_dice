@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dice/blocs/theme_bloc.dart';
-import 'package:flutter_dice/providers/theme_provider.dart';
+import 'package:flutter_dice/models/theme_model.dart';
+import 'package:provider/provider.dart';
 
 class ThemedImage extends StatelessWidget {
   ThemedImage(this.filename);
@@ -9,16 +9,9 @@ class ThemedImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeBloc = ThemeProvider.of(context);
+    final theme = Provider.of<ThemeModel>(context);
+    String suffix = (theme.type == ThemeType.light) ? "w" : "b";
 
-    return StreamBuilder(
-      stream: themeBloc.themeType,
-      builder: (content, snapshot) {
-        ThemeType type = snapshot.data as ThemeType;
-        String suffix = (type == ThemeType.light) ? "w" : "b";
-
-        return Image(image: AssetImage('images/$filename-$suffix.png'));
-      },
-    );
+    return Image(image: AssetImage('images/$filename-$suffix.png'));
   }
 }
