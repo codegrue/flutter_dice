@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_dice/providers/prefs_singleton.dart';
 import 'dart:math';
+import 'dart:io';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -40,10 +41,18 @@ class DiceModel with ChangeNotifier {
   }
 
   Future rollDice() async {
-    var numberOfSides = sides;
-    var value = Random().nextInt(numberOfSides) + 1;
-    roll = value;
-    await saveState();
+    _delayedRoll(sides, 100);
+    _delayedRoll(sides, 100);
+    _delayedRoll(sides, 300);
+    _delayedRoll(sides, 400);
+    _delayedRoll(sides, 500);
+  }
+
+  void _delayedRoll(int sides, int delay) {
+    Timer(Duration(milliseconds: delay), () {
+      roll = Random().nextInt(sides) + 1;
+      saveState();
+    });
   }
 
   void incrementDice() {
