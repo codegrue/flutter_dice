@@ -10,7 +10,7 @@ class ThemedImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Provider.of<ThemeModel>(context);
-    String suffix = (theme.type == ThemeType.light) ? "w" : "b";
+    String suffix = (theme.effectiveType == ThemeType.light) ? "w" : "b";
 
     return Image(image: AssetImage('images/$filename-$suffix.png'));
   }

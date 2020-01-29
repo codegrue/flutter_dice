@@ -14,11 +14,11 @@ class DiceDisplay extends StatelessWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Text("- [", style: TextStyle(fontSize: 20.0)),
+              Text("- ", style: TextStyle(fontSize: 20.0)),
               Text(dice.sides.toString(),
                   style: TextStyle(
                       fontSize: 20.0, color: Theme.of(context).accentColor)),
-              Text(" sided] -", style: TextStyle(fontSize: 20.0)),
+              Text(" sided -", style: TextStyle(fontSize: 20.0)),
             ],
           ),
         ],

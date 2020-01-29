@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_dice/providers/prefs_singleton.dart';
 import 'dart:math';
-import 'dart:io';
 
 import 'package:shared_preferences/shared_preferences.dart';
 

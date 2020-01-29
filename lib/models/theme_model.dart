@@ -3,14 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dice/providers/prefs_singleton.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-enum ThemeType { light, dark }
+enum ThemeType { light, dark, system }
 
 class PreferenceNames {
   static const themeType = "theme_type";
 }
 
-class ThemeModel with ChangeNotifier {
+//https://medium.com/@pmutisya/dark-mode-in-flutter-3742062f9f59
+class ThemeModel with ChangeNotifier, WidgetsBindingObserver {
   ThemeModel() {
+    WidgetsBinding.instance.addObserver(
+        this); // Respond to brightness changes (i.e. switch to/from dark mode)
     loadState();
   }
 
@@ -18,9 +21,22 @@ class ThemeModel with ChangeNotifier {
 
   ThemeData _data;
   ThemeType _type;
+  ThemeType _effectiveType;
 
   ThemeData get data => _data;
   ThemeType get type => _type;
+  ThemeType get effectiveType => _effectiveType; // type sans "system"
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangePlatformBrightness() {
+    _refreshData(_type);
+  }
 
   void set data(ThemeData value) {
     _data = value;
@@ -29,33 +45,42 @@ class ThemeModel with ChangeNotifier {
 
   void set type(ThemeType value) {
     _type = value;
-    data = themeTypeToData(_type);
-    saveState(_type);
+    _refreshData(value);
+  }
+
+  void _refreshData(ThemeType type) {
+    data = themeTypeToData(type);
+    saveState();
     notifyListeners();
   }
 
-  void flipTheme() {
-    var newTheme = (_type == ThemeType.dark) ? ThemeType.light : ThemeType.dark;
-    type = newTheme;
-  }
-
   ThemeData themeTypeToData(ThemeType type) {
-    return (type == ThemeType.light) ? ThemeData.light() : ThemeData.dark();
+    _effectiveType = type;
+
+    // if "system", determine an explicit type (light or dark)
+    if (_effectiveType == ThemeType.system) {
+      Brightness brightness = WidgetsBinding.instance.window.platformBrightness;
+      if (brightness == Brightness.light) {
+        _effectiveType = ThemeType.light;
+      } else {
+        _effectiveType = ThemeType.dark;
+      }
+    }
+
+    return (_effectiveType == ThemeType.light)
+        ? ThemeData.light()
+        : ThemeData.dark();
   }
 
   // Persistence Functions
-  Future saveState(ThemeType themeType) async {
+  Future saveState() async {
     await _prefs.setString(PreferenceNames.themeType, _type.toString());
   }
 
-  ThemeData loadState() {
+  void loadState() {
     var themePref = _prefs.getString(PreferenceNames.themeType) ??
         ThemeType.light.toString();
-    var type = (themePref == ThemeType.light.toString())
-        ? ThemeType.light
-        : ThemeType.dark;
-    type = type;
-    data = themeTypeToData(type);
-    return data;
+
+    type = ThemeType.values.firstWhere((e) => e.toString() == themePref);
   }
 }

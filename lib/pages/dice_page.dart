@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dice/widgets/action_buttons.dart';
 import 'package:flutter_dice/widgets/dice_display.dart';
+import 'package:flutter_dice/widgets/menu_drawer.dart';
 import 'package:flutter_dice/widgets/sides_buttons.dart';
-import 'package:flutter_dice/widgets/theme_icon_button.dart';
 
 class DicePage extends StatelessWidget {
   DicePage({Key key, this.title}) : super(key: key);
@@ -14,10 +14,8 @@ class DicePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
-        actions: <Widget>[
-          ThemeIconButton(),
-        ],
       ),
+      drawer: MenuDrawer(),
       body: Container(
         padding: EdgeInsets.all(20.0),
         child: Stack(
