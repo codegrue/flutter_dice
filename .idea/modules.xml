@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/state_demo.iml" filepath="$PROJECT_DIR$/state_demo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/state_demo_android.iml" filepath="$PROJECT_DIR$/state_demo_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flutter_dice.iml" filepath="$PROJECT_DIR$/flutter_dice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flutter_dice_android.iml" filepath="$PROJECT_DIR$/flutter_dice_android.iml" />
     </modules>
   </component>
 </project>

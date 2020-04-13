@@ -16,6 +16,8 @@ void main() async {
 }
 
 class DiceApp extends StatelessWidget {
+  final String appName = 'Flutter Dice';
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -23,20 +25,16 @@ class DiceApp extends StatelessWidget {
         ChangeNotifierProvider<DiceModel>(create: (_) => DiceModel()),
         ChangeNotifierProvider<ThemeModel>(create: (_) => ThemeModel()),
       ],
-      child: ResponsiveApp(),
-    );
-  }
-}
-
-class ResponsiveApp extends StatelessWidget {
-  final String appName = 'Flutter Dice';
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: appName,
-      theme: Provider.of<ThemeModel>(context).data,
-      home: DicePage(title: appName),
+      child: Builder(
+        // Builder required to allow MaterialApp to access providers
+        builder: (context) {
+          return MaterialApp(
+            title: appName,
+            theme: Provider.of<ThemeModel>(context).data,
+            home: DicePage(title: appName),
+          );
+        },
+      ),
     );
   }
 }
