@@ -5,9 +5,9 @@ version: 1.0.1+2
 dependencies:
   flutter:
     sdk: flutter
-  rxdart: ^0.18.0
-  shared_preferences: ^0.4.2
-  provider: ^4.0.2
+  rxdart: ^0.27.3
+  shared_preferences: ^2.0.13
+  provider: ^6.0.2
 
 dev_dependencies:
   flutter_test:
@@ -19,6 +19,9 @@ flutter_icons:
   android: true
   ios: true
   image_path: "images/app_icon.png"
+
+environment:
+  sdk: '>=2.10.0 <3.0.0'
 
 flutter:
   uses-material-design: true

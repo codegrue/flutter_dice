@@ -17,7 +17,8 @@ class DiceDisplay extends StatelessWidget {
               Text("- ", style: TextStyle(fontSize: 20.0)),
               Text(dice.sides.toString(),
                   style: TextStyle(
-                      fontSize: 20.0, color: Theme.of(context).accentColor)),
+                      fontSize: 20.0,
+                      color: Theme.of(context).colorScheme.secondary)),
               Text(" sided -", style: TextStyle(fontSize: 20.0)),
             ],
           ),
