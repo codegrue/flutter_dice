@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dice/models/theme_model.dart';
+import 'package:flutter_dice/ProviderExample/models/theme_model.dart';
 import 'package:provider/provider.dart';
 
 class ThemedImage extends StatelessWidget {

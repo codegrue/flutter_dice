@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dice/models/dice_model.dart';
+import 'package:flutter_dice/ProviderExample/models/dice_model.dart';
 import 'package:provider/provider.dart';
 
 class DiceDisplay extends StatelessWidget {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dice/widgets/action_buttons.dart';
-import 'package:flutter_dice/widgets/dice_display.dart';
-import 'package:flutter_dice/widgets/menu_drawer.dart';
-import 'package:flutter_dice/widgets/sides_buttons.dart';
+import 'package:flutter_dice/ProviderExample/widgets/action_buttons.dart';
+import 'package:flutter_dice/ProviderExample/widgets/dice_display.dart';
+import 'package:flutter_dice/ProviderExample/widgets/menu_drawer.dart';
+import 'package:flutter_dice/ProviderExample/widgets/sides_buttons.dart';
 
 class DicePage extends StatelessWidget {
   DicePage({Key key, this.title}) : super(key: key);

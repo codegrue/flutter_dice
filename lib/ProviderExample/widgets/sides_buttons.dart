@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dice/models/dice_model.dart';
-import 'package:flutter_dice/widgets/themed_image.dart';
+import 'package:flutter_dice/ProviderExample/models/dice_model.dart';
+import 'package:flutter_dice/ProviderExample/widgets/themed_image.dart';
 import 'package:provider/provider.dart';
 
 class SidesButtons extends StatelessWidget {

@@ -1,39 +1,47 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dice/pages/dice_page.dart';
-import 'package:flutter_dice/providers/prefs_singleton.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'models/dice_model.dart';
-import 'models/theme_model.dart';
+import 'ProviderExample/main.dart';
+import 'prefs_singleton.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  final String appName = 'Flutter Dice Examples';
+
   PrefsSingleton.prefs = await SharedPreferences.getInstance();
 
-  runApp(DiceApp());
+  runApp(MaterialApp(title: appName, home: DiceApp()));
 }
 
 class DiceApp extends StatelessWidget {
-  final String appName = 'Flutter Dice';
+  final String appName = 'Flutter Dice Examples';
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<DiceModel>(create: (_) => DiceModel()),
-        ChangeNotifierProvider<ThemeModel>(create: (_) => ThemeModel()),
-      ],
-      child: Builder(
-        // Builder required to allow MaterialApp to access providers
-        builder: (context) {
-          return MaterialApp(
-            title: appName,
-            theme: Provider.of<ThemeModel>(context).data,
-            home: DicePage(title: appName),
-          );
-        },
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(appName),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            ElevatedButton(
+              child: Text("BLOC"),
+            ),
+            ElevatedButton(
+              child: Text("Provider"),
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute<void>(builder: (context) => ProviderMain()),
+              ),
+            ),
+            ElevatedButton(
+              child: Text("RiverPod"),
+            ),
+          ],
+        ),
       ),
     );
   }

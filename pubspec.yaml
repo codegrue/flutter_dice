@@ -1,12 +1,12 @@
 name: flutter_dice
-description: A new demo of flutter state using the provider pattern
-version: 1.0.1+2
+description: A new demo of flutter state using various patterns
+version: 1.0.2
 
 dependencies:
   flutter:
     sdk: flutter
   rxdart: ^0.27.3
-  shared_preferences: ^2.0.13
+  shared_preferences: ^2.0.15
   provider: ^6.0.2
 
 dev_dependencies:
