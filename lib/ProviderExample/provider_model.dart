@@ -52,12 +52,12 @@ class ProviderModel with ChangeNotifier {
 
   void incrementDice() {
     int value = min(_roll + 1, _sides);
-    if (value != null) roll = value;
+    roll = value;
   }
 
   void decrementDice() {
     int value = max(roll - 1, 1);
-    if (value != null) roll = value;
+    roll = value;
   }
 
   // Persistence Functions

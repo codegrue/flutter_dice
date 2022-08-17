@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:rxdart/rxdart.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_dice/prefs_singleton.dart';
 import 'dart:math';
 
@@ -8,8 +9,26 @@ class PreferenceNames {
   static const sides = "sides";
 }
 
-class StateBloc {
-  StateBloc() {
+class BlocProvider extends InheritedWidget {
+  BlocProvider({
+    Key? key,
+    required Widget child,
+  }) : super(key: key, child: child);
+
+  final BlocModel stateBloc = BlocModel();
+
+  @override
+  bool updateShouldNotify(_) => true;
+
+  static BlocModel of(BuildContext context) {
+    var provider = context.dependOnInheritedWidgetOfExactType<BlocProvider>();
+
+    return (provider == null) ? BlocModel() : provider.stateBloc;
+  }
+}
+
+class BlocModel {
+  BlocModel() {
     loadState();
   }
 
@@ -32,19 +51,29 @@ class StateBloc {
 
   void rollDice() {
     var numberOfSides = _sides.value;
-    var value = Random().nextInt(numberOfSides) + 1;
-    changeRoll(value);
+    _delayedRoll(numberOfSides, 100);
+    _delayedRoll(numberOfSides, 100);
+    _delayedRoll(numberOfSides, 300);
+    _delayedRoll(numberOfSides, 400);
+    _delayedRoll(numberOfSides, 500);
     saveState();
+  }
+
+  void _delayedRoll(int sides, int delay) {
+    Timer(Duration(milliseconds: delay), () {
+      var roll = Random().nextInt(sides) + 1;
+      changeRoll(roll);
+    });
   }
 
   void incrementDice() {
     int value = min(_roll.value + 1, _sides.value);
-    if (value != null) changeRoll(value);
+    changeRoll(value);
   }
 
   void decrementDice() {
     int value = max(_roll.value - 1, 1);
-    if (value != null) changeRoll(value);
+    changeRoll(value);
   }
 
   // Persistence Functions

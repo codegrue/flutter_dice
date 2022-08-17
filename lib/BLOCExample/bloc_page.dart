@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dice/widgets/action_buttons.dart';
 import 'package:flutter_dice/widgets/dice_display.dart';
 import 'package:flutter_dice/widgets/dice_buttons.dart';
-import 'package:flutter_dice/widgets/themed_image.dart';
-import 'package:flutter_dice/BLOCExample/bloc_provider.dart';
+import 'package:flutter_dice/BLOCExample/bloc_model.dart';
 
 class BlocPage extends StatelessWidget {
   BlocPage(this.title);
