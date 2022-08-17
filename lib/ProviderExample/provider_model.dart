@@ -3,22 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dice/prefs_singleton.dart';
 import 'dart:math';
 
-import 'package:shared_preferences/shared_preferences.dart';
-
 class PreferenceNames {
   static const roll = "roll";
   static const sides = "sides";
 }
 
-class DiceModel with ChangeNotifier {
-  DiceModel() {
+class ProviderModel with ChangeNotifier {
+  ProviderModel() {
     loadState();
   }
 
-  final SharedPreferences _prefs = PrefsSingleton.prefs;
-
-  int _roll;
-  int _sides;
+  int _roll = 3;
+  int _sides = 5;
 
   int get roll => _roll;
   int get sides => _sides;
@@ -66,12 +62,12 @@ class DiceModel with ChangeNotifier {
 
   // Persistence Functions
   Future saveState() async {
-    await _prefs.setInt(PreferenceNames.sides, sides);
-    await _prefs.setInt(PreferenceNames.roll, roll);
+    await PrefsSingleton.prefs?.setInt(PreferenceNames.sides, sides);
+    await PrefsSingleton.prefs?.setInt(PreferenceNames.roll, roll);
   }
 
   void loadState() {
-    sides = (_prefs.getInt(PreferenceNames.sides) ?? 6);
-    roll = (_prefs.getInt(PreferenceNames.roll) ?? 1);
+    sides = (PrefsSingleton.prefs?.getInt(PreferenceNames.sides) ?? 6);
+    roll = (PrefsSingleton.prefs?.getInt(PreferenceNames.roll) ?? 1);
   }
 }

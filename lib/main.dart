@@ -1,20 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'ProviderExample/main.dart';
+import 'ProviderExample/provider_main.dart';
+import 'BLOCExample/bloc_main.dart';
 import 'prefs_singleton.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  final String appName = 'Flutter Dice Examples';
-
   PrefsSingleton.prefs = await SharedPreferences.getInstance();
 
-  runApp(MaterialApp(title: appName, home: DiceApp()));
+  runApp(DiceApp());
 }
 
 class DiceApp extends StatelessWidget {
+  final String appName = 'Flutter Dice Examples';
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: appName,
+      home: DiceScaffold(),
+    );
+  }
+}
+
+class DiceScaffold extends StatelessWidget {
   final String appName = 'Flutter Dice Examples';
 
   @override
@@ -23,25 +34,38 @@ class DiceApp extends StatelessWidget {
       appBar: AppBar(
         title: Text(appName),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ElevatedButton(
-              child: Text("BLOC"),
+      body: DiceExamplesMenu(),
+    );
+  }
+}
+
+class DiceExamplesMenu extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          ElevatedButton(
+            child: Text("BLOC"),
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute<void>(
+                  builder: (context) => BlocMain(), maintainState: false),
             ),
-            ElevatedButton(
-              child: Text("Provider"),
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute<void>(builder: (context) => ProviderMain()),
-              ),
+          ),
+          ElevatedButton(
+            child: Text("Provider"),
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute<void>(
+                  builder: (context) => ProviderMain(), maintainState: false),
             ),
-            ElevatedButton(
-              child: Text("RiverPod"),
-            ),
-          ],
-        ),
+          ),
+          // ElevatedButton(
+          //   child: Text("RiverPod"),
+          // ),
+        ],
       ),
     );
   }

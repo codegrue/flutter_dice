@@ -9,5 +9,5 @@ class PrefsSingleton {
 
   static final PrefsSingleton _singleton = PrefsSingleton._internal();
 
-  static SharedPreferences prefs;
+  static SharedPreferences? prefs;
 }

@@ -21,7 +21,7 @@ flutter_icons:
   image_path: "images/app_icon.png"
 
 environment:
-  sdk: '>=2.10.0 <3.0.0'
+  sdk: '>=2.12.0 <3.0.0'
 
 flutter:
   uses-material-design: true
