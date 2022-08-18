@@ -55,7 +55,7 @@ class DiceExamplesMenu extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           ElevatedButton(
-            child: Text("BLOC"),
+            child: Text("BLoC"),
             style: buttonStyle,
             onPressed: () => Navigator.push(
               context,
