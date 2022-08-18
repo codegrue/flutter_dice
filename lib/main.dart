@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'ProviderExample/provider_main.dart';
 import 'BLOCExample/bloc_main.dart';
+import 'RiverpodExample/riverpod_main.dart';
 import 'prefs_singleton.dart';
 
 void main() async {
@@ -26,7 +27,7 @@ class DiceApp extends StatelessWidget {
 }
 
 class DiceScaffold extends StatelessWidget {
-  final String appName = 'Flutter Dice Examples';
+  final String appName = 'Flutter State Examples';
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +41,8 @@ class DiceScaffold extends StatelessWidget {
 }
 
 class DiceExamplesMenu extends StatelessWidget {
+  var buttonStyle = ElevatedButton.styleFrom(minimumSize: const Size(200, 40));
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -48,6 +51,7 @@ class DiceExamplesMenu extends StatelessWidget {
         children: <Widget>[
           ElevatedButton(
             child: Text("BLOC"),
+            style: buttonStyle,
             onPressed: () => Navigator.push(
               context,
               MaterialPageRoute<void>(
@@ -56,15 +60,22 @@ class DiceExamplesMenu extends StatelessWidget {
           ),
           ElevatedButton(
             child: Text("Provider"),
+            style: buttonStyle,
             onPressed: () => Navigator.push(
               context,
               MaterialPageRoute<void>(
                   builder: (context) => ProviderMain(), maintainState: false),
             ),
           ),
-          // ElevatedButton(
-          //   child: Text("RiverPod"),
-          // ),
+          ElevatedButton(
+            child: Text("Riverpod"),
+            style: buttonStyle,
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute<void>(
+                  builder: (context) => RiverpodMain(), maintainState: false),
+            ),
+          ),
         ],
       ),
     );

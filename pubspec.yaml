@@ -8,6 +8,7 @@ dependencies:
   rxdart: ^0.27.3
   shared_preferences: ^2.0.15
   provider: ^6.0.2
+  flutter_riverpod: ^2.0.0-dev.9
 
 dev_dependencies:
   flutter_test:
