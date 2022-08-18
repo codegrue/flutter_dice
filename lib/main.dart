@@ -37,7 +37,8 @@ class DiceApp extends StatelessWidget {
 }
 
 class DiceExamplesMenu extends StatelessWidget {
-  var buttonStyle = ElevatedButton.styleFrom(minimumSize: const Size(200, 40));
+  final buttonStyle =
+      ElevatedButton.styleFrom(minimumSize: const Size(200, 40));
 
   @override
   Widget build(BuildContext context) {
