@@ -20,27 +20,18 @@ class PreferenceNames {
 }
 
 class DiceApp extends StatelessWidget {
-  final String appName = 'Flutter Dice Examples';
+  final String appName = 'Flutter State Examples';
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: appName,
-      home: DiceScaffold(),
-    );
-  }
-}
-
-class DiceScaffold extends StatelessWidget {
-  final String appName = 'Flutter State Examples';
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(appName),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text(appName),
+        ),
+        body: DiceExamplesMenu(),
       ),
-      body: DiceExamplesMenu(),
     );
   }
 }
