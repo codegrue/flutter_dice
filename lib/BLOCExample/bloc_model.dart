@@ -4,10 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dice/prefs_singleton.dart';
 import 'dart:math';
 
-class PreferenceNames {
-  static const roll = "roll";
-  static const sides = "sides";
-}
+import '../main.dart';
 
 class BlocProvider extends InheritedWidget {
   BlocProvider({
@@ -77,9 +74,10 @@ class BlocModel {
   }
 
   // Persistence Functions
-  Future saveState() async {
+  Future<bool> saveState() async {
     await PrefsSingleton.prefs?.setInt(PreferenceNames.sides, _sides.value);
     await PrefsSingleton.prefs?.setInt(PreferenceNames.roll, _roll.value);
+    return true;
   }
 
   void loadState() {

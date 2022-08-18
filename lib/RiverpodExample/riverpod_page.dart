@@ -16,28 +16,31 @@ class RiverpodPage extends ConsumerWidget {
     final dice = ref.watch(riverpodProvider);
     final diceNotifier = ref.read(riverpodProvider.notifier);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
-      body: Container(
-        padding: EdgeInsets.all(20.0),
-        child: Stack(
-          children: <Widget>[
-            DiceDisplay(
-              roll: dice.roll,
-              sides: dice.sides,
-            ),
-            DiceButtons(
-              onDicePressed: diceNotifier.changeSides,
-              selectedSides: dice.sides,
-            ),
-            ActionButtons(
-              onDecrementPressed: () => diceNotifier.decrementDice(),
-              onIncrementPressed: () => diceNotifier.incrementDice(),
-              onRollPressed: () => diceNotifier.rollDice(),
-            ),
-          ],
+    return WillPopScope(
+      onWillPop: () => dice.saveState(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(title),
+        ),
+        body: Container(
+          padding: EdgeInsets.all(20.0),
+          child: Stack(
+            children: <Widget>[
+              DiceDisplay(
+                roll: dice.roll,
+                sides: dice.sides,
+              ),
+              DiceButtons(
+                onDicePressed: diceNotifier.changeSides,
+                selectedSides: dice.sides,
+              ),
+              ActionButtons(
+                onDecrementPressed: () => diceNotifier.decrementDice(),
+                onIncrementPressed: () => diceNotifier.incrementDice(),
+                onRollPressed: () => diceNotifier.rollDice(),
+              ),
+            ],
+          ),
         ),
       ),
     );

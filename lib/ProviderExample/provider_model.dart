@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dice/prefs_singleton.dart';
 import 'dart:math';
 
-class PreferenceNames {
-  static const roll = "roll";
-  static const sides = "sides";
-}
+import '../main.dart';
 
 class ProviderModel with ChangeNotifier {
   ProviderModel() {
@@ -61,9 +58,10 @@ class ProviderModel with ChangeNotifier {
   }
 
   // Persistence Functions
-  Future saveState() async {
+  Future<bool> saveState() async {
     await PrefsSingleton.prefs?.setInt(PreferenceNames.sides, sides);
     await PrefsSingleton.prefs?.setInt(PreferenceNames.roll, roll);
+    return true;
   }
 
   void loadState() {

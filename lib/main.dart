@@ -14,6 +14,11 @@ void main() async {
   runApp(DiceApp());
 }
 
+class PreferenceNames {
+  static const roll = "roll";
+  static const sides = "sides";
+}
+
 class DiceApp extends StatelessWidget {
   final String appName = 'Flutter Dice Examples';
 
